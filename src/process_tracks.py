@@ -86,15 +86,16 @@ def compute_trajectory(records):
     avg_lonAcceleration = np.mean(lonAcceleration)
     avg_latAcceleration = np.mean(latAcceleration)
 
-    # Check if the average heading difference indicates a left turn
+    # Check if the average heading difference is 0 -> T = Stationary object
     if avg_heading_diff == 0:
         trajectory = "Parked"
     else:
+        # Check if x_center metric resembles a linear plot -> T = Straight trajectory
         if is_linear(x_centers):
             trajectory = "Straight"
         else:
             if avg_heading_diff < 0:
-                # Check the direction of change in x_centers
+                # Check the direction of change in x_centers -> if x_center of last frame is greater than intial frame, classify as left
                 dx = x_centers[-1] - x_centers[0]
                 if dx > 0:
                     trajectory = "Left Turn"
@@ -145,11 +146,22 @@ def run(input_bucket, output_table, temp_location):
 
         # Publish messages to the vehicle_trajectory topic
         _ = tracks | 'Publish to Pub/Sub' >> beam.Map(
-            lambda message: publish_message('vehicle_trajectory', message)
+            lambda message: publish_message(message)
         )
 
-def publish_message(topic_name, message):
+def publish_message(message):
     publisher = pubsub_v1.PublisherClient(credentials=credentials)
+    if message['trajectory'] == 'Parked':
+        topic_name = 'parked'
+    elif message['trajectory'] == 'Straight':
+        topic_name = 'straight'
+    elif message['trajectory'] == 'Left Turn':
+        topic_name = 'left'
+    elif message['trajectory'] == 'Right Turn':
+        topic_name = 'right'
+    else:
+        topic_name = 'unknown'  # Handle unexpected trajectory
+        
     topic_path = publisher.topic_path(project_id, topic_name)
     data = json.dumps(message).encode('utf-8')
     future = publisher.publish(topic_path, data)
