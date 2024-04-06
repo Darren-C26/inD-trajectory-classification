@@ -30,4 +30,4 @@ Access the Looker Studio report [here](https://lookerstudio.google.com/s/oabCVky
 
 ## Implementation Demo
 The following video provides a demonstration of the trajectory classification pipeline in action, showcasing how object trajectories are computed and classified based on various intersection scenarios.
-<video controls src="video/Grp6_Cloud_Project_Demo.mp4" title="Implementation Demo"></video>
+![Implementation Demo](https://drive.google.com/file/d/1anP9tobmOz5Bw65v38ZkjOnBAQNttaOV/preview)
