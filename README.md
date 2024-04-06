@@ -11,9 +11,10 @@ This project aims to analyze and classify trajectories of objects recorded at va
 
 ### Installation
 1. Clone the repository: `git clone https://github.com/Darren-C26/inD-trajectory-classification`
-2. Install dependencies: `pip install -r requirements.txt`
-3. Set up Google Cloud credentials: Follow the instructions [here](https://cloud.google.com/docs/authentication/getting-started)
-4. Configure environment variables if necessary.
+2. Go into the source directory `cd src`
+3. Install dependencies: `pip install -r requirements.txt`
+4. Set up Google Cloud credentials: Follow the instructions [here](https://cloud.google.com/docs/authentication/getting-started)
+5. Configure environment variables if necessary.
 
 ## Architecture
 The project utilizes Google Cloud Platform services such as Google Cloud Storage, BigQuery, and Pub/Sub. The data pipeline is built using Apache Beam for data processing and streaming. Messages are published to Pub/Sub topics based on trajectory classifications, and processed records are saved to BigQuery for further analysis.
