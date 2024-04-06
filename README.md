@@ -27,3 +27,7 @@ The project utilizes Google Cloud Platform services such as Google Cloud Storage
 
 ## Looker Studio Report
 Access the Looker Studio report [here](https://lookerstudio.google.com/s/oabCVkyYdxg). Explore general analytics of object trajectories for critical scenario analysis at intersections.
+
+## Implementation Demo
+The following video provides a demonstration of the trajectory classification pipeline in action, showcasing how object trajectories are computed and classified based on various intersection scenarios.
+<video controls src="video/Grp6_Cloud_Project_Demo.mp4" title="Implementation Demo"></video>
